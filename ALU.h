@@ -19,6 +19,10 @@ public:
     bool get_zero();
     bool get_overflow();
 
+    void set_ALU_result(bool temp[]);
+    void set_zero(bool temp);
+    void set_overflow(bool temp);
+
     void print_ALU_result();
 };
 

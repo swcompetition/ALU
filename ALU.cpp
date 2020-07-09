@@ -40,6 +40,18 @@ bool ALU::get_overflow() {
     return this->overflow;
 }
 
+void ALU::set_ALU_result(bool temp[]){
+    this->ALU_result = temp;
+}
+
+void ALU::set_zero(bool temp){
+    this->zero = temp;
+}
+
+void ALU::set_overflow(bool temp){
+    this->overflow = temp;
+}
+
 void ALU::print_ALU_result()
 {
     for (int i = 0; i < DATA_BITS; i++) {
