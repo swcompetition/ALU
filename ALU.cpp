@@ -41,7 +41,9 @@ bool ALU::get_overflow() {
 }
 
 void ALU::set_ALU_result(bool temp[]){
-    this->ALU_result = temp;
+    for (int i = 0; i < DATA_BITS; i++) {
+        ALU_result[i] = temp[i];
+    }
 }
 
 void ALU::set_zero(bool temp){
