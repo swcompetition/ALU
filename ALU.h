@@ -9,12 +9,20 @@ class ALU
 {
 private:
     bool ALU_result[DATA_BITS] = { 0 };
-    bool zero=1;
+    bool add_one[DATA_BITS] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 };
+    bool zero = 1;
     bool overflow = 0;
+
 public:
     ALU();
     ~ALU();
-    void ALU_operation(bool data1[], bool data2[]);
+    void ALU_operation(bool data1[], bool data2[], string ALU_control);
+
+    void add(bool data1[], bool data2[], bool flag);
+    void and_operation(bool data1[], bool data2[]);
+    void or_operation(bool data1[], bool data2[]);
+    void invert(bool data2[]);
+
     bool* get_ALU_result();
     bool get_zero();
     bool get_overflow();
