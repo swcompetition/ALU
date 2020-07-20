@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "Control.h"
 using namespace std;
 
 #define DATA_BITS 32
@@ -12,6 +13,9 @@ private:
     bool add_one[DATA_BITS] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 };
     bool zero = 1;
     bool overflow = 0;
+    bool shift_right = true;
+    Control* main_control;
+
 
 public:
     ALU();
@@ -22,6 +26,7 @@ public:
     void and_operation(bool data1[], bool data2[]);
     void or_operation(bool data1[], bool data2[]);
     void invert(bool data2[]);
+    void shift(bool data1[], int shamt);
 
     bool* get_ALU_result();
     bool get_zero();

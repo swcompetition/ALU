@@ -20,6 +20,41 @@ void ALU::ALU_operation(bool data1[], bool data2[], string ALU_control) {
     else if (ALU_control.compare("0001") == 0) { //or
         this->or_operation(data1, data2);
     }
+    else if (ALU_control.compare("0011") == 0 || ALU_control.compare("0100") == 0) { //sll, srl
+        if (ALU_control.compare("0100") == 0) {
+            this->shift_right = true;
+        }
+        else {
+            this->shift_right = false;
+        }
+        int shift_dec = main_control->conv_bin_dec_idx(data2, DATA_BITS);
+        this->shift(data1, shift_dec);
+    }
+}
+
+void ALU::shift(bool data1[], int shamt) {
+    string data1_str = main_control->bool_to_str(data1, DATA_BITS);
+    string add_zero = "";
+
+    string temp = "";
+
+    for (int i = 0; i < shamt; i++) {
+        add_zero += "0";
+    }
+    cout << "add_zero : " << add_zero << endl;
+
+    if (this->shift_right) { //srl
+        temp = add_zero + data1_str;
+        temp = temp.substr(0, DATA_BITS);
+    }
+    else { //sll
+        temp = data1_str + add_zero;
+        temp = temp.substr(shamt, DATA_BITS);
+    }
+
+    for (int i = 0; i < DATA_BITS; i++) {
+        this->ALU_result[i] = temp.at(i) - '0';
+    }
 }
 
 void ALU::add(bool data1[], bool data2[], bool flag) {
