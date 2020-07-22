@@ -7,11 +7,11 @@ ALU::~ALU() {
 }
 void ALU::ALU_operation(bool data1[], bool data2[], string ALU_control) {
     bool flag = true;
-    if (ALU_control.compare("0010") == 0) { //add
+    if (ALU_control.compare("0010") == 0) { //add, lw sw
         this->add(data1, data2, flag);
     }
     else if (ALU_control.compare("0110") == 0 || ALU_control.compare("0111") == 0) { //sub or slt
-        this->invert(data2);
+        this->twos_complement(data2);
         this->add(data1, data2, flag); // in slt, if overflow is 0, jump rd //in beq, if zero is 0, jump address
     }
     else if (ALU_control.compare("0000") == 0) { //and
@@ -29,6 +29,10 @@ void ALU::ALU_operation(bool data1[], bool data2[], string ALU_control) {
         }
         int shift_dec = main_control->conv_bin_dec_idx(data2, DATA_BITS);
         this->shift(data1, shift_dec);
+    }
+    else if (ALU_control.compare("1100") == 0) { //nor
+        this->or_operation(data1, data2);
+        this->invert(this->ALU_result);
     }
 }
 
@@ -108,6 +112,12 @@ void ALU::or_operation(bool data1[], bool data2[]) {
     }
 }
 void ALU::invert(bool data2[]) {
+    for (int i = DATA_BITS - 1; i >= 0; i--) {
+        data2[i] == 0 ? data2[i] = 1 : data2[i] = 0;
+    }
+}
+
+void ALU::twos_complement(bool data2[]) {
     for (int i = DATA_BITS - 1; i >= 0; i--) {
         data2[i] == 0 ? data2[i] = 1 : data2[i] = 0;
     }
