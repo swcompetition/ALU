@@ -26,6 +26,7 @@ public:
     void and_operation(bool data1[], bool data2[]);
     void or_operation(bool data1[], bool data2[]);
     void invert(bool data2[]);
+    void twos_complement(bool data2[]);
     void shift(bool data1[], int shamt);
     void setControl(Control& ctr);
 
