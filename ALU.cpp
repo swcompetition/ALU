@@ -3,8 +3,12 @@
 ALU::ALU() {
 }
 ALU::~ALU() {
-
 }
+
+void ALU::setControl(Control& ctr) {
+    this->main_control = ctr;
+}
+
 void ALU::ALU_operation(bool data1[], bool data2[], string ALU_control) {
     bool flag = true;
     if (ALU_control.compare("0010") == 0) { //add, lw sw
@@ -27,7 +31,7 @@ void ALU::ALU_operation(bool data1[], bool data2[], string ALU_control) {
         else {
             this->shift_right = false;
         }
-        int shift_dec = main_control->conv_bin_dec_idx(data2, DATA_BITS);
+        int shift_dec = main_control.conv_bin_dec_idx(data2, DATA_BITS);
         this->shift(data1, shift_dec);
     }
     else if (ALU_control.compare("1100") == 0) { //nor
@@ -37,7 +41,7 @@ void ALU::ALU_operation(bool data1[], bool data2[], string ALU_control) {
 }
 
 void ALU::shift(bool data1[], int shamt) {
-    string data1_str = main_control->bool_to_str(data1, DATA_BITS);
+    string data1_str = main_control.bool_to_str(data1, DATA_BITS);
     string add_zero = "";
 
     string temp = "";

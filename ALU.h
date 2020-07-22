@@ -14,7 +14,7 @@ private:
     bool zero = 1;
     bool overflow = 0;
     bool shift_right = true;
-    Control* main_control;
+    Control main_control;
 
 
 public:
@@ -27,6 +27,7 @@ public:
     void or_operation(bool data1[], bool data2[]);
     void invert(bool data2[]);
     void shift(bool data1[], int shamt);
+    void setControl(Control& ctr);
 
     bool* get_ALU_result();
     bool get_zero();
